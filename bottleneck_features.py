@@ -38,12 +38,21 @@ else:
     print('CUDA Not Available')
     device = torch.device('cpu')
 
-# Load model
+    
+#################################### DATA & MODEL #################################
+#Create datasets
+train_Dataset, valid_Dataset, test_Dataset = data.create_datasets(seed, batch_size, f_rockstar)
+
+#Create Dataloaders
+test_loader  = DataLoader(dataset=test_Dataset,
+                          batch_size=batch_size, shuffle=False)
+# Load best model
 model = architecture.AutoEncoder(input_size, bottleneck, out_features, n_layers).to(device)
 if os.path.exists(f_best_model):
     model.load_state_dict(torch.load(f_best_model, map_location=torch.device('cpu')))
     
-######################################### Load the features in the bottleneck ####################################
+    
+##################### Load the features in the bottleneck ###########################
 bottleneck_2_data = np.zeros((367,24), dtype=np.float32)
 # first 11 columns are the input features
 # next 2 columns are the bottleneck features
