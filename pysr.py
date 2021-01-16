@@ -29,7 +29,8 @@ unary_operators  = ["exp", "sin", "neg", "square", "cube", "logm", "logm10", "sq
 x = norm_input        # normalized input from test_loader for model 2 (Rows=examples, columns=features)
 y = bottleneck_2[:,0] # first feature of bottleneck
 batch_size = 64       # for annealing and mutating
+cores = 10            # request more cpu cores on slurm
 
 # Initiate Symbolic regression with PYSR
 equations = pysr(x, y, niterations=500, binary_operators= binary_operators,
-                 unary_operators= unary_operators, variable_names = property_names)
+                 unary_operators= unary_operators, variable_names = property_names, procs = cores)
