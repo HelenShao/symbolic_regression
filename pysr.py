@@ -12,7 +12,7 @@ import corr_coef
 from pysr import pysr, best, get_hof
 
 # load input and bottleneck
-bottleneck_2 = np.load("Bottleneck_2_.npy")[:,11:13]
+bottleneck_2 = np.load("Bottleneck_2_data.npy")[:,11:13]
 norm_input = np.load("Bottleneck_2_data.npy")[:,0:11]
 
 # 11 input features are the x-values
